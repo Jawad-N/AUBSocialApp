@@ -14,8 +14,8 @@ class User( db.Model ):
 class Friendship(db.model):
     __tablename__ = 'friendship'
     id = db.Column(db.Integer, primary_key=True)
-    user1_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user2_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user1_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
+    user2_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
     #Friends are represented as a graph, these are the edges, the vertices are the users
     #It is a pairwise friendship
 
@@ -29,15 +29,15 @@ class Chat(db.model):
 
 
 class Message(db.model):
+    #These are the msgs, to form a chat we just point these msgs to the corresponding chat witha foreign key
     __tablename__ = 'message'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String)
-    chat_id = db.Column(db.Integer, db.ForeignKey('chat.id'))
+    chat_id = db.Column(db.Integer, db.ForeignKey('chat.id'), nullable = False)
     timestamp = db.Column(db.DateTime, default=func.now())
 
 class TutoringSession(db.model):
     __tablename__ = 'tutoring_session'
-
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String)
     price = db.Column(db.Float())
