@@ -1,0 +1,100 @@
+{
+    "id": 194434,
+    "term": "202420",
+    "termDesc": "Spring 2023-2024",
+    "courseReferenceNumber": "20010",
+    "partOfTerm": "1",
+    "courseNumber": "210",
+    "subject": "ACCT",
+    "subjectDescription": "Accounting",
+    "sequenceNumber": "1",
+    "campusDescription": "Main Campus",
+    "scheduleTypeDescription": "Lecture",
+    "courseTitle": "Financial Accounting",
+    "creditHours": 3,
+    "maximumEnrollment": 30,
+    "enrollment": 36,
+    "seatsAvailable": -6,
+    "waitCapacity": 0,
+    "waitCount": 0,
+    "waitAvailable": 0,
+    "crossList": null,
+    "crossListCapacity": null,
+    "crossListCount": null,
+    "crossListAvailable": null,
+    "creditHourHigh": null,
+    "creditHourLow": 3,
+    "creditHourIndicator": null,
+    "openSection": false,
+    "linkIdentifier": null,
+    "isSectionLinked": false,
+    "subjectCourse": "ACCT210",
+    "faculty": 
+    [
+        {
+        "bannerId": "1143",
+        "category": null,
+        "class": "net.hedtech.banner.student.faculty.FacultyResultDecorator",
+        "courseReferenceNumber": "20010",
+        "displayName": "Hout, Bassima",
+        "emailAddress": "bh03@aub.edu.lb",
+        "primaryIndicator": false,
+        "term": "202420"
+        },
+        {
+        "bannerId": "1144",
+        "category": null,
+        "class": "net.hedtech.banner.student.faculty.FacultyResultDecorator",
+        "courseReferenceNumber": "20010",
+        "displayName": "Ghanem, Abdeljalil",
+        "emailAddress": "ag10@aub.edu.lb",
+        "primaryIndicator": true,
+        "term": "202420"
+        }
+    ],
+    "meetingsFaculty": 
+    [
+        {
+        "category": "01",
+        "class": "net.hedtech.banner.student.schedule.SectionSessionDecorator",
+        "courseReferenceNumber": "20010",
+        "faculty": 
+        [
+        ],
+        "meetingTime": {
+            "beginTime": "1100",
+            "building": "OSB",
+            "buildingDescription": "Suliman S.Olayan Sch.of Busin.",
+            "campus": "M",
+            "campusDescription": "Main Campus",
+            "category": "01",
+            "class": "net.hedtech.banner.general.overall.MeetingTimeDecorator",
+            "courseReferenceNumber": "20010",
+            "creditHourSession": 3.0,
+            "endDate": "05/18/2024",
+            "endTime": "1215",
+            "friday": false,
+            "hoursWeek": 3.0,
+            "meetingScheduleType": "L",
+            "meetingType": "CLAS",
+            "meetingTypeDescription": "Class",
+            "monday": false,
+            "room": "233",
+            "saturday": false,
+            "startDate": "01/18/2024",
+            "sunday": false,
+            "term": "202420",
+            "thursday": true,
+            "tuesday": true,
+            "wednesday": false
+        },
+        "term": "202420"
+        }
+    ],
+    "reservedSeatSummary": null,
+    "sectionAttributes": 
+    [
+    ],
+    "instructionalMethod": null,
+    "instructionalMethodDescription": null
+}
