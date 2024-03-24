@@ -28,21 +28,12 @@ class Friendship(db.Model):
     #Friends are represented as a graph, these are the edges, the vertices are the users
     #It is a pairwise friendship
 
-class Chat(db.Model):
-    __tablename__ = 'chat'
-    id = db.Column(db.Integer, primary_key=True)
-    is_private = db.Column(db.Boolean)
-    friendship_id = db.Column(db.Integer, db.ForeignKey('friendship.id'))
-    #A chat is only used as a component to be pointed at by the messages
-    #We also store here if the chat is private or public, in addition to the corresponding parties
-
-
 class Message(db.Model):
     #These are the msgs, to form a chat we just point these msgs to the corresponding chat witha foreign key
     __tablename__ = 'message'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text)
-    chat_id = db.Column(db.Integer, db.ForeignKey('chat.id'), nullable = False)
+    friendship_id = db.Column(db.Integer, db.ForeignKey('friendship.id'))
     timestamp = db.Column(db.DateTime, default=func.now())
 
 class TutoringSession(db.Model):
