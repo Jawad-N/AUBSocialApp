@@ -70,8 +70,15 @@ class tutoringSession( db.Model ):
     courseID = db.Column( db.Integer, db.ForeignKey("course.id"), nullable = False )
     description = db.Column( db.String(100), nullable = False )
     price = db.Column( db.Float, nullable = False )
-
     def __init__( self, courseID, description, price ):
         self.courseID = courseID
         self.description = description
         self.price = price
+
+
+class tutoringSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "courseID", "description","price")
+        model = tutoringSession
+
+tutoring_schema = tutoringSchema()
