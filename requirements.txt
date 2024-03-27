@@ -11,11 +11,14 @@ Flask-Mail==0.9.1
 flask-marshmallow==1.2.1
 Flask-SQLAlchemy==3.1.1
 greenlet==3.0.3
+install==1.3.5
 itsdangerous==2.1.2
 Jinja2==3.1.3
 jwt==1.3.1
 MarkupSafe==2.1.5
 marshmallow==3.21.1
+marshmallow-sqlalchemy==1.0.0
+mysql-connector-python==8.3.0
 packaging==24.0
 pycparser==2.21
 PyJWT==2.8.0
