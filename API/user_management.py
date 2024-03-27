@@ -106,3 +106,38 @@ def authenticateUser():
         abort(403)
     token = create_token(user.id)
     return jsonify({"token": token}), 200
+
+def get_current_user_id():
+    token = request.headers.get('Authorization')
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token, DB_CONFIG, algorithms=['HS256'])
+        return payload['sub']
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+@user_management.route('/add_friend/<int:user_id>', methods=['POST'])
+def add_friend(user_id):
+    current_user_id = get_current_user_id()
+    if not current_user_id:
+        return jsonify({"error": "User not authenticated"}), 401
+
+    if user_id == current_user_id:
+        return jsonify({"error": "Cannot add yourself as a friend"}), 400
+
+    if user_id == current_user_id:
+        return jsonify({"error": "Cannot add your7self as a friend"}), 400
+
+    existing_friendship = Friendship.query.filter(
+        (Friendship.user1_id == current_user_id and Friendship.user2_id == user_id) |
+        (Friendship.user1_id == user_id and Friendship.user2_id == current_user_id)
+    ).first()
+
+    # Users are not friends, add the friendship
+    new_friendship = Friendship(user1_id=current_user_id, user2_id=user_id)
+    db.session.add(new_friendship)
+    db.session.commit()
+    return jsonify({"message": "Friend added successfully"}), 200
