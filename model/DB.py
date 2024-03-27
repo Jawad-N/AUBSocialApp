@@ -1,4 +1,4 @@
-from app import db, bcrypt, ma
+from ..app import db, bcrypt, ma
 from sqlalchemy.sql import func
 import json
 #Common database components 
@@ -37,14 +37,6 @@ class Message(db.Model):
     friendship_id = db.Column(db.Integer, db.ForeignKey('friendship.id'))
     timestamp = db.Column(db.DateTime, default=func.now())
 
-class TutoringSession(db.Model):
-    __tablename__ = 'tutoring_session'
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
-    price = db.Column(db.Float())
-    time = db.Column(db.DateTime)
-    duration = db.Column(db.Integer)
-    course = db.Column(db.Text)
 
 class Course(db.Model):
     __tablename__ = 'course'
@@ -70,3 +62,16 @@ class CourseSchema(ma.Schema):
         model = Course
 
 course_schema = CourseSchema()
+
+
+class tutoringSession( db.Model ):
+    __tablename__ = "tutoringSession"
+    id = db.Column( db.Integer, primary_key=True )
+    courseID = db.Column( db.Integer, db.ForeignKey("course.id"), nullable = False )
+    description = db.Column( db.String(100), nullable = False )
+    price = db.Column( db.Float, nullable = False )
+
+    def __init__( self, courseID, description, price ):
+        self.courseID = courseID
+        self.description = description
+        self.price = price

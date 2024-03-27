@@ -5,9 +5,9 @@ import string
 import datetime
 import jwt
 from db_config import DB_CONFIG
-from app import db, bcrypt, app  # Import the necessary objects directly from app
-from model.DB import User, user_schema  # Adjust the path to import User and user_schema
-from app import registered_users
+from ..app import db, bcrypt, app  # Import the necessary objects directly from app
+from ..model.DB import User, user_schema  # Adjust the path to import User and user_schema
+from ..app import registered_users
 
 from API.email_pass import emailPass
 
