@@ -5,9 +5,9 @@ import string
 import datetime
 import jwt
 from db_config import DB_CONFIG
-from ..app import db, bcrypt, app  # Import the necessary objects directly from app
-from ..model.DB import User, user_schema  # Adjust the path to import User and user_schema
-from ..app import registered_users
+from app import db, bcrypt, app  # Import the necessary objects directly from app
+from model.DB import User, user_schema  # Adjust the path to import User and user_schema
+from app import registered_users
 
 from API.email_pass import emailPass
 
@@ -21,6 +21,7 @@ mail = Mail(app)
 
 # Create a blueprint for the gateway
 user_management = Blueprint('gateway', __name__)
+
 
 def generate_code(length=6):
     """Generate a random code of given length."""
@@ -65,6 +66,7 @@ def register():
     registered_users[email] = [code, username, password]
     return jsonify({'redirect': url_for('gateway.verify_code', email=email)}), 200
 
+
 @user_management.route('/verify/<email>', methods=['POST'])
 def verify_code(email):
     user_code = request.json['code']
@@ -75,6 +77,7 @@ def verify_code(email):
         return jsonify(user_schema.dump(user)), 200
     else:
         return jsonify({"error": "invalid code"}), 403
+
 
 def create_token(user_id):
     payload = {
@@ -87,6 +90,7 @@ def create_token(user_id):
         DB_CONFIG,
         algorithm='HS256'
     )
+
 
 @user_management.route('/authentication', methods=['POST'])
 def authenticateUser():

@@ -1,6 +1,6 @@
-from ..app import db, bcrypt, ma
+from app import db, bcrypt, ma
 from sqlalchemy.sql import func
-
+import json
 #Common database components 
 
 class User( db.Model ):
@@ -19,6 +19,7 @@ class UserSchema(ma.Schema):
         model = User
         
 user_schema = UserSchema()
+
 
 class Friendship(db.Model):
     __tablename__ = 'friendship'
@@ -44,3 +45,28 @@ class TutoringSession(db.Model):
     time = db.Column(db.DateTime)
     duration = db.Column(db.Integer)
     course = db.Column(db.Text)
+
+class Course(db.Model):
+    __tablename__ = 'course'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable = False)
+    section = db.Column(db.String(10), nullable = False)
+    professor = db.Column(db.String(100), nullable = False)
+    location = db.Column(db.String(100), nullable = False)
+    room = db.Column(db.String(10), nullable = False)
+    meeting_time = db.Column(db.Text, nullable = False)  # meeting time is a serialized json
+
+    def __init__(self, name, section, professor, location, room, meeting_time):
+        self.name = name
+        self.section = section
+        self.professor = professor
+        self.location = location
+        self.room = room
+        self.meeting_time = json.dumps(meeting_time)
+
+class CourseSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "section","professor", "location", "room", "meeting_time")
+        model = Course
+
+course_schema = CourseSchema()
