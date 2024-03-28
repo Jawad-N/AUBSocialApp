@@ -28,6 +28,15 @@ class Friendship(db.Model):
     user2_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = False)
     #Friends are represented as a graph, these are the edges, the vertices are the users
     #It is a pairwise friendship
+    def __init__( self, user1_id, user2_id ):
+        self.user1_id = user1_id
+        self.user2_id = user2_id
+
+class FriendshipSchema( ma.Schema ):
+    class Meta:
+        fields = ("id", "user1_id", "user2_id")
+        model = Friendship
+friendship_schema = FriendshipSchema()
 
 class Message(db.Model):
     #These are the msgs, to form a chat we just point these msgs to the corresponding chat witha foreign key
