@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_marshmallow import Marshmallow
-from db_config import DB_CONFIG 
+from .db_config import DB_CONFIG 
 
 
 app = Flask(__name__)

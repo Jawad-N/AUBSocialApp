@@ -4,7 +4,7 @@ import random
 import string
 import datetime
 import jwt
-from db_config import DB_CONFIG
+from ..db_config import DB_CONFIG
 from ..app import db, bcrypt, app  # Import the necessary objects directly from app
 from ..model.DB import Course, course_schema, tutoringSession, tutoring_schema  # Adjust the path to import User and user_schema
 from ..app import registered_users

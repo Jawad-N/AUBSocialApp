@@ -4,12 +4,12 @@ import random
 import string
 import datetime
 import jwt
-from db_config import DB_CONFIG
+from ..db_config import DB_CONFIG
 from ..app import db, bcrypt, app  # Import the necessary objects directly from app
 from ..model.DB import User, user_schema, Friendship, friendship_schema  # Adjust the path to import User and user_schema
 from ..app import registered_users
 
-from API.email_pass import emailPass
+from .email_pass import emailPass
 
 app.config['MAIL_SERVER'] = 'smtp.outlook.com'
 app.config['MAIL_PORT'] = 587
@@ -37,16 +37,21 @@ def check_email_end(input_string):
 @user_management.route('/register', methods=['POST'])
 def register():
     try:
+        print(request.json)
         username = request.json['username']
         email = request.json['email']
         password = request.json['password']
     except:
+        print(1)
         return jsonify({"error": "Missing values or values with incorrect names in the json"}), 400
     if(username == None or password == None or email is None):
+        print(2)
         return jsonify({"error": "Values given should not be empty"}), 400
     if(len(username) > 30):
+        print(3)
         return jsonify({"error": "username is too long"}), 400
     if(len(username) < 3):
+        print(4)
         return jsonify({"error": "username is too short"}), 400
     user = User.query.filter_by(email=email).first()
     if user is not None:

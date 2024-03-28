@@ -24,15 +24,15 @@ object RetrofitClient {
 
     interface ApiService {
         // Registers a new user
-        @POST("/register")
+        @POST("/user/register")
         fun registerUser(@Body userInfo: User): Call<User>
 
         // Verifies a user's email
-        @POST("/verify/{email}")
+        @POST("/user/verify/{email}")
         fun verifyUser(@Path("email") email: String, @Body codeInfo: Map<String, String>): Call<VerificationResponse>
 
         // Authenticates a user
-        @POST("/authentication")
+        @POST("/user/authentication")
         fun authenticateUser(@Body loginInfo: User): Call<AuthenticationResponse>
     }
 }
