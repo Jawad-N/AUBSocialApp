@@ -6,7 +6,7 @@ import datetime
 import jwt
 from db_config import DB_CONFIG
 from ..app import db, bcrypt, app  # Import the necessary objects directly from app
-from ..model.DB import User, user_schema  # Adjust the path to import User and user_schema
+from ..model.DB import User, user_schema, Friendship, friendship_schema  # Adjust the path to import User and user_schema
 from ..app import registered_users
 
 from API.email_pass import emailPass
@@ -119,25 +119,45 @@ def get_current_user_id():
     except jwt.InvalidTokenError:
         return None
 
-@user_management.route('/add_friend/<int:user_id>', methods=['POST'])
-def add_friend(user_id):
-    current_user_id = get_current_user_id()
-    if not current_user_id:
+def extract_auth_token(authenticated_request):
+    auth_header = authenticated_request.headers.get('Authorization')
+    if auth_header:
+        return auth_header.split(" ")[1]
+    else:
+        return None
+
+
+def decode_token(token):
+    payload = jwt.decode(token, DB_CONFIG, 'HS256')
+    return payload['sub']
+
+@user_management.route('/add_friend', methods=['POST'])
+def add_friend():
+    token = extract_auth_token( request )
+    user_id = decode_token( token )
+    try:
+        user_2 = User.query.filter_by(username= request.json['username_2']).first()
+        user_2_id = user_2.id
+    except:
+        return jsonify({"error": "Invalid Input"}), 401
+    
+    
+    if not user_2_id:
         return jsonify({"error": "User not authenticated"}), 401
 
-    if user_id == current_user_id:
+    if user_id == user_2_id:
         return jsonify({"error": "Cannot add yourself as a friend"}), 400
 
-    if user_id == current_user_id:
-        return jsonify({"error": "Cannot add your7self as a friend"}), 400
-
     existing_friendship = Friendship.query.filter(
-        (Friendship.user1_id == current_user_id and Friendship.user2_id == user_id) |
-        (Friendship.user1_id == user_id and Friendship.user2_id == current_user_id)
+        (Friendship.user1_id == user_id and Friendship.user2_id == user_2_id) |
+        (Friendship.user1_id == user_2_id and Friendship.user2_id == user_id)
     ).first()
-
+    if existing_friendship!=None:
+        return jsonify({"error": "Friends already added"}), 401
     # Users are not friends, add the friendship
-    new_friendship = Friendship(user1_id=current_user_id, user2_id=user_id)
+    l = [user_id, user_2_id]
+    l.sort()
+    new_friendship = Friendship(user1_id=l[0], user2_id=l[1])
     db.session.add(new_friendship)
     db.session.commit()
-    return jsonify({"message": "Friend added successfully"}), 200
+    return friendship_schema.dump(new_friendship), 200
