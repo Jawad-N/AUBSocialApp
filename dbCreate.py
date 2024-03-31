@@ -1,3 +1,7 @@
+'''
+This file creates the database
+'''
+
 from app import db
 from app import app
 

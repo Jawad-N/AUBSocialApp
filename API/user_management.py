@@ -22,18 +22,20 @@ mail = Mail(app)
 # Create a blueprint for the gateway
 user_management = Blueprint('gateway', __name__)
 
-
+#THIS FUNCTION GENERATES 6 DIGIT VERIFICATION CODE
 def generate_code(length=6):
     """Generate a random code of given length."""
     letters_and_digits = string.ascii_letters + string.digits
     return ''.join(random.choice(letters_and_digits) for i in range(length))
 
+#THIS FUNCTION VERIFY AUB EMAIL
 def check_email_end(input_string):
     if input_string.endswith("@mail.aub.edu"):
         return True
     else:
         return False
 
+#THIS FUNCTION VALIDATE USER REGISTER INFORMATION
 @user_management.route('/register', methods=['POST'])
 def register():
     try:
@@ -44,6 +46,7 @@ def register():
     except:
         print(1)
         return jsonify({"error": "Missing values or values with incorrect names in the json"}), 400
+    #Check if input is valid
     if(username == None or password == None or email is None):
         print(2)
         return jsonify({"error": "Values given should not be empty"}), 400
@@ -53,14 +56,20 @@ def register():
     if(len(username) < 3):
         print(4)
         return jsonify({"error": "username is too short"}), 400
+    
+    #Check if email and username are registered in database
     user = User.query.filter_by(email=email).first()
     if user is not None:
         return jsonify({"error": "email already used"}), 409
     user = User.query.filter_by(username=username).first()
     if user is not None:
         return jsonify({"error": "username already used"}), 409  
+    
+    #Check if email is AUB email
     if not check_email_end(email):  
         return jsonify({"error": "Use your AUB email."}), 403
+    
+    #Send verification code to email given
     code = generate_code()
     msg = Message('AUB Social App One-time Code Verification', sender='aubsocialapp@outlook.com', recipients=[email])
     msg.body = f'Your one-time code is: {code}'
@@ -71,7 +80,7 @@ def register():
     registered_users[email] = [code, username, password]
     return jsonify({'redirect': url_for('gateway.verify_code', email=email)}), 200
 
-
+#THIS FUNCTION VERIFIES AND ADDS USER TO DATABASE
 @user_management.route('/verify/<email>', methods=['POST'])
 def verify_code(email):
     user_code = request.json['code']
