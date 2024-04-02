@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.joudysabbagh.frontend.api.RetrofitClient
+import com.joudysabbagh.frontend.api.model.Email
 import com.joudysabbagh.frontend.api.model.User
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     private var usernameEditText: TextInputLayout? = null
     private var emailEditText: TextInputLayout? = null
     private var passwordEditText: TextInputLayout? = null
+    private var codeEditText: TextInputLayout? = null
     private var registerButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,11 +56,17 @@ class RegisterActivity : AppCompatActivity() {
             .enqueue(object : Callback<User> {
                 // In case of successful response
                 override fun onResponse(call: Call<User>, response: Response<User>) {
-                    Snackbar.make(
-                        registerButton as View,
-                        "Account Created.",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    if (response.isSuccessful) {
+                        // If response is 200, do this
+                        verifyDialog()
+                    } else {
+                        // If response is not 200
+                        Snackbar.make(
+                            registerButton as View,
+                            "ERROR: ${response.message()}",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 }
                 // In case of issue with the network request or the server responds with an error status code
                 override fun onFailure(call: Call<User>, t: Throwable) {
@@ -67,5 +77,59 @@ class RegisterActivity : AppCompatActivity() {
                     ).show()
                 }
         })
+    }
+    private fun verifyDialog() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_verify, null)
+        val codeEditText = dialogView.findViewById<TextInputLayout>(R.id.txtInptCode)
+
+        builder.setView(dialogView)
+            .setPositiveButton("Verify") { dialog, _ ->
+                val code = codeEditText.editText?.text.toString()
+                val email = Email()
+                email.code = code
+                // Retrofit API call to verify the code against the server
+                RetrofitClient.createAPI().verifyUser(emailEditText?.editText?.text.toString(), email)
+                    .enqueue(object : Callback<Email> {
+                        // In case of successful response
+                        override fun onResponse(call: Call<Email>, response: Response<Email>) {
+                            if (response.isSuccessful) {
+                                // If response is 200, do this
+                                Snackbar.make(
+                                    registerButton as View,
+                                    "Account Created.",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                                onCompleted()
+                            } else {
+                                // If response is not 200
+                                Snackbar.make(
+                                    registerButton as View,
+                                    "Invalid code, could not create account: ${response.message()}",
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                        // In case of issue with the network request or the server responds with an error status code
+                        override fun onFailure(call: Call<Email>, t: Throwable) {
+                            Snackbar.make(
+                                dialogView,
+                                "An error occured, could not create account: ${t.message}",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                    })
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun onCompleted() {
+        val intent = Intent(this, entry::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
     }
 }

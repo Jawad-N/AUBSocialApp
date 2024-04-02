@@ -92,20 +92,22 @@ def verify_code(email):
     else:
         return jsonify({"error": "invalid code"}), 403
 
-
+# THIS FUNCTION GENERATES A JSON WEB TOKEN FOR A USER
 def create_token(user_id):
+    # create a payload containing issue & expiration date of user token
     payload = {
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=4),
         'iat': datetime.datetime.utcnow(),
         'sub': user_id
     }
+    # encode payload into a JSON web token and sign it to prevent tampering
     return jwt.encode(
         payload,
         DB_CONFIG,
         algorithm='HS256'
     )
 
-
+# THIS FUNCTION AUTHENTICATES THE USER INTO THE APP
 @user_management.route('/authentication', methods=['POST'])
 def authenticateUser():
     try:
@@ -113,11 +115,15 @@ def authenticateUser():
         password = request.json['password']
     except:
         abort(400)
+    #Check if user is registered in database
     user = User.query.filter_by(username=username).first()
     if(user is None):
         abort(403)
+    #Check if user password is correct
     if not(bcrypt.check_password_hash(user.hashed_password, password)):
         abort(403)
+    
+    #Assign user JWT to maintain user session
     token = create_token(user.id)
     return jsonify({"token": token}), 200
 

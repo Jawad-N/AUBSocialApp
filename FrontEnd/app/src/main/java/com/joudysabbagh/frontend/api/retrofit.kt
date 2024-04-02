@@ -1,5 +1,6 @@
 package com.joudysabbagh.frontend.api
 
+import com.joudysabbagh.frontend.api.model.Email
 import com.joudysabbagh.frontend.api.model.User
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -29,7 +30,7 @@ object RetrofitClient {
 
         // Verifies a user's email
         @POST("/user/verify/{email}")
-        fun verifyUser(@Path("email") email: String, @Body codeInfo: Map<String, String>): Call<VerificationResponse>
+        fun verifyUser(@Path("email") email: String, @Body codeInfo: Email): Call<Email>
 
         // Authenticates a user
         @POST("/user/authentication")
