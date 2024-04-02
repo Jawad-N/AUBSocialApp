@@ -1,6 +1,7 @@
 package com.joudysabbagh.frontend.api
 
 import com.joudysabbagh.frontend.api.model.Email
+import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -34,11 +35,7 @@ object RetrofitClient {
 
         // Authenticates a user
         @POST("/user/authentication")
-        fun authenticateUser(@Body loginInfo: User): Call<AuthenticationResponse>
+        fun authenticateUser(@Body loginInfo: User): Call<Token>
     }
 }
 
-// You might need to create data classes to represent the request bodies and the responses. For example:
-data class UserResponse(val redirect: String)
-data class VerificationResponse(val token: String?)
-data class AuthenticationResponse(val token: String)
