@@ -181,3 +181,44 @@ def add_friend():
     db.session.add(new_friendship)
     db.session.commit()
     return friendship_schema.dump(new_friendship), 200
+
+resetting_password = {}
+
+#RESET PASSWORD 
+@user_management.route('/request_password_reset', methods=['POST'])
+def request_password_reset():
+    email = request.json.get('email')
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({'error': 'User not found.'}), 404
+
+    # Generate a random verification code
+    verification_code = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+    resetting_password[email] = verification_code
+
+    # Send the verification code via email
+    msg = Message('Your Password Reset Code', sender='aubsocialapp@outlook.com', recipients=[email])
+    msg.body = f'Your password reset code is: {verification_code}'
+    try:
+        mail.send(msg)
+    except Exception as e:
+        
+        return jsonify({"error": "Internal Error"}), 400
+    return jsonify({'message': 'A password reset code has been sent to your email.'}), 200
+
+@user_management.route('/reset_password', methods=['POST'])
+def reset_password():
+    email = request.json.get('email')
+    code = request.json.get('code')
+    new_password = request.json.get('new_password')
+    user = User.query.filter_by(email=email).first()
+    user_code = resetting_password[email] 
+    if user and user_code == code:
+        # Hash and update the new password
+        hashed_password = bcrypt.generate_password_hash(new_password)
+        user.hashed_password = hashed_password
+        resetting_password.pop(email)  # Clear the reset code
+        db.session.commit()
+        return jsonify({'message': 'Your password has been successfully reset.'}), 200
+    else:
+        return jsonify({'error': 'Invalid email or reset code.'}), 400
