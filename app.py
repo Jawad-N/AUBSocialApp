@@ -20,10 +20,12 @@ registered_users = {}
 from .API.user_management import user_management
 from .API.course_management import course_management
 from .API.chat_management import chat_management
+from .API.room_management import room_management
 
-app.register_blueprint(course_management, url_prefix = '/course' )
 app.register_blueprint(user_management, url_prefix='/user')
+app.register_blueprint(course_management, url_prefix='/course')
 app.register_blueprint(chat_management, url_prefix='/chat')
+app.register_blueprint(room_management, url_prefix='/room')
 
 if __name__ == '__main__':
     app.run(debug=True)
