@@ -33,7 +33,7 @@ def find_empty_rooms():
 
         session_start = datetime.strptime(meeting_times['start_time'], '%H%M').time()
         session_end = datetime.strptime(meeting_times['end_time'], '%H%M').time()
-        if start_time < session_end and end_time > session_start:
+        if (start_time < session_start and session_start<end_time) or (start_time < session_end and session_end<end_time):
             occupied_rooms.add(course.room)
 
         
