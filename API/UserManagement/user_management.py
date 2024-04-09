@@ -4,12 +4,13 @@ import random
 import string
 import datetime
 import jwt
-from ..db_config import DB_CONFIG
-from ..app import db, bcrypt, app  # Import the necessary objects directly from app
-from ..model.DB import User, user_schema, Friendship, friendship_schema  # Adjust the path to import User and user_schema
-from ..app import registered_users
 
+from .db_config import DB_CONFIG
+from .model.DB import User, user_schema, Friendship, friendship_schema  # Adjust the path to import User and user_schema
 from .email_pass import emailPass
+from .app import db, bcrypt, app,registered_users  # Import the necessary objects directly from app
+
+
 
 app.config['MAIL_SERVER'] = 'smtp.outlook.com'
 app.config['MAIL_PORT'] = 587
@@ -34,6 +35,10 @@ def check_email_end(input_string):
         return True
     else:
         return False
+
+@user_management.route('/')
+def hello_world():
+    return "Hello World"
 
 #THIS FUNCTION VALIDATE USER REGISTER INFORMATION
 @user_management.route('/register', methods=['POST'])
