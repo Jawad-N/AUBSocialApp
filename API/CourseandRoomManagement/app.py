@@ -5,8 +5,10 @@ This file configures and defines the Flask application by initializing the datab
 from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
 from flask_marshmallow import Marshmallow
+from flask_bcrypt import Bcrypt
+
+
 from .db_config import DB_CONFIG 
 
 app = Flask(__name__)
@@ -15,17 +17,14 @@ CORS(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 ma = Marshmallow(app)
-registered_users = {}
 
-from .API.UserManagement.user_management import user_management
-from .API.CourseandRoomManagement.course_management import course_management
-from .API.chat_management import chat_management
-from .API.CourseandRoomManagement.room_management import room_management
 
-app.register_blueprint(user_management, url_prefix='/user')
+from .course_management import course_management
+from .room_management import room_management
+
 app.register_blueprint(course_management, url_prefix='/course')
-app.register_blueprint(chat_management, url_prefix='/chat')
 app.register_blueprint(room_management, url_prefix='/room')
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port = 5002)

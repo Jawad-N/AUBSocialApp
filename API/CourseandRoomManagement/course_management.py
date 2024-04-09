@@ -1,13 +1,7 @@
-from flask import Blueprint, request, jsonify, url_for, abort
-from flask_mail import Mail,Message
-import random
-import string
-import datetime
-import jwt
-from ..db_config import DB_CONFIG
-from ..app import db, bcrypt, app  # Import the necessary objects directly from app
-from ..model.DB import Course, course_schema, tutoringSession, tutoring_schema,courseFeedback,course_feedback_schema  # Adjust the path to import User and user_schema
-from ..app import registered_users
+from flask import Blueprint, request, jsonify, abort
+from .app import db
+from .model.DB import Course, course_schema, tutoringSession, tutoring_schema,courseFeedback,course_feedback_schema  # Adjust the path to import User and user_schema
+import requests
 
 course_management = Blueprint('courseGateway', __name__)
 
@@ -63,17 +57,19 @@ def getTutoring():
 
 ##COURSE FEEDBACK
 @course_management.route('/addCourseFeedback', methods = ["POST"])
-
 def addCourseFeedback():
     # Parse JSON payload from the request
     data = request.json
+    headers = dict(request.headers)
+    body = request.get_json()
+    try:
+        user = requests.post("http://127.0.0.1:5001/user/get_user", headers=headers, json=body).json()
+        user_id = user["id"]
+    except:
+        user_id = None
     try:
         course_name = data['course_name']
         course_section = data['section']
-        try:
-            user_id = data['user_id']
-        except:
-            user_id = None
         content = data['content']
     except KeyError as e:
         # If any field is missing in the JSON payload

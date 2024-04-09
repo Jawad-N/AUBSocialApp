@@ -153,8 +153,11 @@ def extract_auth_token(authenticated_request):
 
 
 def decode_token(token):
-    payload = jwt.decode(token, DB_CONFIG, 'HS256')
-    return payload['sub']
+    try:
+        payload = jwt.decode(token, DB_CONFIG, 'HS256')
+        return payload['sub']
+    except:
+        return None
 
 @user_management.route('/add_friend', methods=['POST'])
 def add_friend():
@@ -227,3 +230,14 @@ def reset_password():
         return jsonify({'message': 'Your password has been successfully reset.'}), 200
     else:
         return jsonify({'error': 'Invalid email or reset code.'}), 400
+    
+@user_management.route('/get_user', methods=['POST'])
+def get_user():
+    token = extract_auth_token(request)
+    user_id = decode_token( token )
+    if user_id==None:
+        return None, 200
+    user = User.query.filter_by(id=user_id).first()
+    if user is not None:
+        return jsonify(user_schema.dump(user)), 200
+    return None, 200

@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify,Blueprint
+from flask import request, jsonify, Blueprint
 from datetime import datetime
-from ..model.DB import db, Course 
+from .model.DB import db, Course 
 import json
 
 room_management = Blueprint('room_management', __name__)
 
-@room_management.route('/find_empty_rooms', methods=['GET'])
+@room_management.route('/find_empty_rooms', methods=['POST'])
 def find_empty_rooms():
     building = request.json.get('building')
     day = request.json.get('day')
