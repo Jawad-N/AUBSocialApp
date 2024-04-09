@@ -91,3 +91,19 @@ class tutoringSchema(ma.Schema):
         model = tutoringSession
 
 tutoring_schema = tutoringSchema()
+
+
+class courseFeedback( db.Model ):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    content = db.Column(db.Text, nullable = False)
+    def __init__(self, course_id, user_id, content):
+        super(courseFeedback, self).__init__(course_id=course_id, content=content, user_id=user_id)
+
+class courseFeedbackSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "course_id", "user_id", "content")
+        model = courseFeedback
+        
+course_feedback_schema = courseFeedbackSchema()
