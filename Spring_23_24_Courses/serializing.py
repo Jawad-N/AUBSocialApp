@@ -2,9 +2,10 @@ import json
 import mysql.connector 
 
 mydb = mysql.connector.connect(
-    host = "localhost",
+    host = "127.0.0.2",
     user = "root",
-    passwd = "12345",
+    passwd = "example_pass",
+    port = 3307
 )
 
 mydb.reset_session()

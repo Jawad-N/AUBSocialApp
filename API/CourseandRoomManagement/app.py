@@ -12,7 +12,7 @@ from flask_bcrypt import Bcrypt
 from .db_config import DB_CONFIG 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_CONFIG
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:example_pass@172.19.0.2:3307/aubsocial'
 CORS(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
