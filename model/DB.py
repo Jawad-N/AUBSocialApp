@@ -109,3 +109,36 @@ class courseFeedbackSchema(ma.Schema):
         model = courseFeedback
         
 course_feedback_schema = courseFeedbackSchema()
+
+
+class Group( db.Model ):
+    id = db.Column( db.Integer, primary_key=True )
+    group_name = db.Column( db.String(150), nullable = False, unique = True )
+    creator = db.Column( db.Integer, db.ForeignKey("user.id"), nullable = False )
+    description = db.Column( db.String(150), nullable = True )
+    #potentially add groupChat
+    def __init__(self, group_name, creator_id, description=None):
+        self.group_name = group_name
+        self.creator_id = creator_id
+        self.description = description
+
+class GroupSchema( ma.Schema ):
+    class Meta:
+        fields = ("id", "group_name", "creator", "description")
+        model = Group
+group_schema = GroupSchema()
+
+
+class GroupMembership( db.Model ):
+    id = db.Column( db.Integer, primary_key = True )
+    member = db.Column( db.Integer, db.ForeignKey("user.id"), nullable = False )
+    group = db.Column( db.Integer, db.ForeignKey("group.id"), nullable = False )
+    def __init__(self, member_id, group_id):
+        self.member_id = member_id
+        self.group_id = group_id
+
+class GroupMembershipSchema( ma.Schema ):
+    class Meta:
+        fields = ("id", "member", "group")
+        model = GroupMembership
+group_membership_schema = GroupMembershipSchema()
