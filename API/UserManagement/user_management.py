@@ -11,7 +11,6 @@ from .email_pass import emailPass
 from .app import db, bcrypt, app,registered_users  # Import the necessary objects directly from app
 
 
-
 app.config['MAIL_SERVER'] = 'smtp.outlook.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -36,9 +35,6 @@ def check_email_end(input_string):
     else:
         return False
 
-@user_management.route('/')
-def hello_world():
-    return "Hello World"
 
 #THIS FUNCTION VALIDATE USER REGISTER INFORMATION
 @user_management.route('/register', methods=['POST'])
@@ -168,8 +164,6 @@ def add_friend():
         user_2_id = user_2.id
     except:
         return jsonify({"error": "Invalid Input"}), 401
-    
-    
     if not user_2_id:
         return jsonify({"error": "User not authenticated"}), 401
 

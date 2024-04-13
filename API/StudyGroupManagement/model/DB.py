@@ -12,10 +12,10 @@ class User( db.Model ):
     #A user has a password a username a handle inside the app and an id which will often be used as a foreign key
 
 
-class Group( db.Model ):
+class StudyGroup( db.Model ):
     id = db.Column( db.Integer, primary_key=True )
     group_name = db.Column( db.String(150), nullable = False, unique = True )
-    creator = db.Column( db.Integer, db.ForeignKey("user.id"), nullable = False )
+    creator_id = db.Column( db.Integer, db.ForeignKey("user.id"), nullable = False )
     description = db.Column( db.String(150), nullable = True )
     #potentially add groupChat
     def __init__(self, group_name, creator_id, description=None):
@@ -23,20 +23,20 @@ class Group( db.Model ):
         self.creator_id = creator_id
         self.description = description
 
-class GroupSchema( ma.Schema ):
+class StudyGroupSchema( ma.Schema ):
     class Meta:
-        fields = ("id", "group_name", "creator", "description")
-        model = Group
-group_schema = GroupSchema()
+        fields = ("id", "group_name", "creator_id", "description")
+        model = StudyGroup
+group_schema = StudyGroupSchema()
 
 
 class GroupMembership( db.Model ):
     id = db.Column( db.Integer, primary_key = True )
     member = db.Column( db.Integer, db.ForeignKey("user.id"), nullable = False )
-    group = db.Column( db.Integer, db.ForeignKey("group.id"), nullable = False )
-    def __init__(self, member_id, group_id):
-        self.member_id = member_id
-        self.group_id = group_id
+    group = db.Column( db.Integer, db.ForeignKey("study_group.id"), nullable = False )
+    def __init__(self, member, group):
+        self.member = member
+        self.group = group
 
 class GroupMembershipSchema( ma.Schema ):
     class Meta:

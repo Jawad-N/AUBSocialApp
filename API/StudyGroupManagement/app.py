@@ -20,9 +20,8 @@ ma = Marshmallow(app)
 
 from .study_management import study_management
 
-
-app.register_blueprint(course_management, url_prefix='/study')
+app.register_blueprint(study_management, url_prefix='/study')
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port = 5002)
+    app.run(debug=True,port = 5003)
