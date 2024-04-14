@@ -14,9 +14,7 @@ RUN pip install -r requirements.txt
 COPY . /app
 
 # expose the port
-EXPOSE 5003
+EXPOSE 5004
 
 # specify the command to run on container start
-CMD ["flask", "run","-h","0.0.0.0","-p","5003"]
-
-
+CMD ["flask", "run","-h","0.0.0.0","-p","5004"]

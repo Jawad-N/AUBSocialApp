@@ -15,6 +15,7 @@ def getGroups():
     return jsonify( result )
 
 
+
 #Adding a groupmembership, i.e. a user to a group
 #Steps are, take the group name and username
 #Check these are valid, i.e. user and group found

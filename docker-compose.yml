@@ -5,9 +5,44 @@ services:
       MYSQL_ROOT_PASSWORD: example_pass
     ports:
       - "3307:3306"
+
   phpMyAdmin:
     image: phpmyadmin
     environment:
       PMA_ARBITRARY: 1
     ports:
       - "8080:80"
+
+  course_and_room_management:
+    build:
+      context: ./API/CourseandRoomManagement
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./API/CourseandRoomManagement:/app
+
+  user_management:
+    build:
+      context: ./API/UserManagement
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./API/UserManagement:/app
+
+  chat_management:
+    build:
+      context: ./API/ChatManagement
+    ports:
+      - "5003:5003"
+    volumes:
+      - ./API/ChatManagement:/app
+
+
+  study_group_management:
+    build:
+      context: ./API/StudyGroupManagement
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./API/StudyGroupManagement:/app
+
