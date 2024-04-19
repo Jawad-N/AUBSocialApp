@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.joudysabbagh.frontend.R
 import com.joudysabbagh.frontend.api.Authentication
 import com.joudysabbagh.frontend.api.RetrofitClient
 import com.joudysabbagh.frontend.api.model.Token
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
             })
     }
     private fun onCompleted() {
-        val intent = Intent(this, entry::class.java)
+        val intent = Intent(this, CatalogActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }

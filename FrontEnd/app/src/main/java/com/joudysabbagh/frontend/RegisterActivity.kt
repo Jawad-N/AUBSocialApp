@@ -159,7 +159,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun onCompleted() {
-        val intent = Intent(this, entry::class.java)
+        val intent = Intent(this, CatalogActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }

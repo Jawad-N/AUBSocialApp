@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".entry"
+            android:name=".CatalogActivity"
             android:exported="false" />
         <activity
             android:name=".VerificationActivity"
