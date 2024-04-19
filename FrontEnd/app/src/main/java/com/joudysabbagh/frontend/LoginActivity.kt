@@ -19,15 +19,20 @@ class LoginActivity : AppCompatActivity() {
     private var usernameEditText: TextInputLayout? = null
     private var passwordEditText: TextInputLayout? = null
     private var loginButton: Button? = null
+    private var resetButton: Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         usernameEditText = findViewById(R.id.txtInptUsername)
         passwordEditText = findViewById(R.id.txtInptPassword)
         loginButton = findViewById(R.id.btnLogin)
+        resetButton = findViewById(R.id.btnReset)
         // Set click listener for register button
         loginButton?.setOnClickListener {
             authenticateUser()
+        }
+        resetButton?.setOnClickListener {
+            resetPassword()
         }
     }
 
@@ -73,6 +78,12 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun onCompleted() {
         val intent = Intent(this, CatalogActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    private fun resetPassword() {
+        val intent = Intent(this, ResetPasswordActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }

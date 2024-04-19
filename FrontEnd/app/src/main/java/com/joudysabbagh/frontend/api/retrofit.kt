@@ -71,6 +71,14 @@ object RetrofitClient {
         // Authenticates a user
         @POST("/user/authentication")
         fun authenticateUser(@Body loginInfo: User): Call<Token>
+
+        // Request password for a user
+        @POST("user/request_password_reset")
+        fun requestPassword(@Body emailInfo: Email) : Call <Email>
+
+        // Reset password for a user
+        @POST("user/reset_password")
+        fun resetPassword(@Body emailInfo: Email) : Call <Email>
     }
     interface ChatService {
     }
