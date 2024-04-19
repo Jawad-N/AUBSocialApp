@@ -28,8 +28,6 @@ services:
       - "5001:5001"
     volumes:
       - ./API/UserManagement:/app
-    environment:
-      DB_CONFIG: "mysql+pymysql://root:example_pass@db:3306/aubsocial"
 
   chat_management:
     build:
