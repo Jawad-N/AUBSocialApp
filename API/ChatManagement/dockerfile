@@ -9,6 +9,7 @@ WORKDIR /app
 
 # install the dependencies and packages in the requirements file
 RUN pip install -r requirements.txt
+RUN pip install cryptography
 
 # copy everything else from the local file to the image
 COPY . /app

@@ -12,19 +12,54 @@ import retrofit2.http.Path
 
 object RetrofitClient {
     // API URL from which we will send and receive packages
-    private const val API_URL: String = "http://10.0.2.2:5000"
+    private const val API_URL_UM: String = "http://10.0.2.2:5001"
+    private const val API_URL_CRM: String = "http://10.0.2.2:5002"
+    private const val API_URL_CM: String = "http://10.0.2.2:5003"
+    private const val API_URL_SGM: String = "http://10.0.2.2:5004"
 
     // Set up details on how to send and receive these data packages
-    fun createAPI(): ApiService {
+
+    // USER MANAGEMENT API FUNCTION CALL
+    fun retrofitUserManagement(): UserService {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(API_URL)
+            .baseUrl(API_URL_UM)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        // Create an instance of our User Management API interface.
-        return retrofit.create(ApiService::class.java)
+        // Create an implementation of the UserService interface that handles making HTTP requests to the specified base URL
+        return retrofit.create(UserService::class.java)
     }
 
-    interface ApiService {
+    // COURSE AND ROOM MANAGEMENT API FUNCTION CALL
+    fun retrofitCourseAndRoomManagement(): ChatService {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(API_URL_CRM)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        // Create an implementation of the ChatService interface that handles making HTTP requests to the specified base URL
+        return retrofit.create(ChatService::class.java)
+    }
+
+    // CHAT ROOM MANAGEMENT API FUNCTION CALL
+    fun retrofitChatManagement(): CourseAndRoomService {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(API_URL_CM)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        // Create an implementation of the CourseAndRoomService interface that handles making HTTP requests to the specified base URL
+        return retrofit.create(CourseAndRoomService::class.java)
+    }
+
+    // STUDY GROUP MANAGEMENT API FUNCTION CALL
+    fun retrofitStudyGroupManagement(): StudyService {
+        val retrofit: Retrofit = Retrofit.Builder()
+            .baseUrl(API_URL_SGM)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        // Create an implementation of the StudyService interface that handles making HTTP requests to the specified base URL
+        return retrofit.create(StudyService::class.java)
+    }
+
+    interface UserService  {
         // Registers a new user
         @POST("/user/register")
         fun registerUser(@Body userInfo: User): Call<User>
@@ -37,5 +72,12 @@ object RetrofitClient {
         @POST("/user/authentication")
         fun authenticateUser(@Body loginInfo: User): Call<Token>
     }
-}
+    interface ChatService {
+    }
+    interface CourseAndRoomService {
+    }
+    interface StudyService {
+    }
+
+    }
 

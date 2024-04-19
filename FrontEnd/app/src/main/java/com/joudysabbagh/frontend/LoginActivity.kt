@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         user.password = passwordEditText?.editText?.text.toString()
 
         //HTTP POST request to authenticate a user on the server
-        RetrofitClient.createAPI().authenticateUser(user)
+        RetrofitClient.retrofitUserManagement().authenticateUser(user)
             //Send & handle the response from the network request asynchronously (different thread than UI thread)
             .enqueue(object : Callback<Token> {
                 // In case of successful response

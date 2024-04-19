@@ -2,7 +2,7 @@ services:
   db:
     image: mysql
     environment: 
-      MYSQL_ROOT_PASSWORD: example_pass
+      MYSQL_ROOT_PASSWORD: "example_pass"
     ports:
       - "3307:3306"
 
@@ -28,6 +28,8 @@ services:
       - "5001:5001"
     volumes:
       - ./API/UserManagement:/app
+    environment:
+      DB_CONFIG: "mysql+pymysql://root:example_pass@db:3306/aubsocial"
 
   chat_management:
     build:

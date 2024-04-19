@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         //HTTP POST request to register a user on the server
-        RetrofitClient.createAPI().registerUser(user)
+        RetrofitClient.retrofitUserManagement().registerUser(user)
             //Send & handle the response from the network request asynchronously (different thread than UI thread)
             .enqueue(object : Callback<User> {
                 // In case of successful response
@@ -94,13 +94,13 @@ class RegisterActivity : AppCompatActivity() {
                 val email = Email()
                 email.code = code
                 // Retrofit API call to verify the code against the server
-                RetrofitClient.createAPI().verifyUser(emailEditText?.editText?.text.toString(), email)
+                RetrofitClient.retrofitUserManagement().verifyUser(emailEditText?.editText?.text.toString(), email)
                     .enqueue(object : Callback<Email> {
                         // In case of successful response
                         override fun onResponse(call: Call<Email>, response: Response<Email>) {
                             if (response.isSuccessful) {
                                 //HTTP POST request to authenticate a user on the server
-                                RetrofitClient.createAPI().authenticateUser(user)
+                                RetrofitClient.retrofitUserManagement().authenticateUser(user)
                                     //Send & handle the response from the network request asynchronously (different thread than UI thread)
                                     .enqueue(object : Callback<Token> {
                                         // In case of successful response
