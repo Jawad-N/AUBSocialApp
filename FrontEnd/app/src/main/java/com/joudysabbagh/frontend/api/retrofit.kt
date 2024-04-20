@@ -1,12 +1,14 @@
 package com.joudysabbagh.frontend.api
 
 import com.joudysabbagh.frontend.api.model.Email
+import com.joudysabbagh.frontend.api.model.Room
 import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -30,23 +32,23 @@ object RetrofitClient {
     }
 
     // COURSE AND ROOM MANAGEMENT API FUNCTION CALL
-    fun retrofitCourseAndRoomManagement(): ChatService {
+    fun retrofitCourseAndRoomManagement(): CourseAndRoomService {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(API_URL_CRM)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         // Create an implementation of the ChatService interface that handles making HTTP requests to the specified base URL
-        return retrofit.create(ChatService::class.java)
+        return retrofit.create(CourseAndRoomService::class.java)
     }
 
     // CHAT ROOM MANAGEMENT API FUNCTION CALL
-    fun retrofitChatManagement(): CourseAndRoomService {
+    fun retrofitChatManagement(): ChatService {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(API_URL_CM)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         // Create an implementation of the CourseAndRoomService interface that handles making HTTP requests to the specified base URL
-        return retrofit.create(CourseAndRoomService::class.java)
+        return retrofit.create(ChatService::class.java)
     }
 
     // STUDY GROUP MANAGEMENT API FUNCTION CALL
@@ -78,11 +80,19 @@ object RetrofitClient {
 
         // Reset password for a user
         @POST("user/reset_password")
-        fun resetPassword(@Body emailInfo: Email) : Call <Email>
+        fun resetPassword(@Body passwordInfo: Email) : Call <Email>
+
+        @POST("user/add_friend")
+        fun addFriend(@Body friendInfo: User,
+                      @Header("Authorization") authorization: String?) : Call <Any>
     }
     interface ChatService {
     }
     interface CourseAndRoomService {
+        // Filter empty rooms
+        @POST("room/find_empty_rooms")
+        fun filterRoom(@Body roomInfo: Room) : Call <ArrayList<Room>>
+
     }
     interface StudyService {
     }

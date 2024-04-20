@@ -4,16 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.joudysabbagh.frontend.api.Authentication
 import com.joudysabbagh.frontend.api.RetrofitClient
 import com.joudysabbagh.frontend.api.model.Email
-import com.joudysabbagh.frontend.api.model.Token
-import com.joudysabbagh.frontend.api.model.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +23,6 @@ class ResetPasswordActivity : AppCompatActivity() {
         emailTextView = findViewById(R.id.txtInptEmail)
         resetButton = findViewById(R.id.btnReset)
 
-        resetButton = findViewById(R.id.btnReset)
         resetButton?.setOnClickListener {
             resetPassword()
         }
@@ -124,5 +119,6 @@ class ResetPasswordActivity : AppCompatActivity() {
     private fun onCompleted() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)    }
+        startActivity(intent)
+    }
 }

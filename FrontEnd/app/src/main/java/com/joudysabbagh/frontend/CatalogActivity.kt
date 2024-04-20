@@ -3,6 +3,7 @@ package com.joudysabbagh.frontend
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import com.joudysabbagh.frontend.api.Authentication
 
@@ -18,7 +19,6 @@ class CatalogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
-        Authentication.initialize(this)
 
         logoutButton = findViewById(R.id.btnLogout)
         tutoringButton = findViewById(R.id.btnTutoring)

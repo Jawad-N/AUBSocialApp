@@ -25,6 +25,8 @@ class RegisterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        Authentication.initialize(this)
+
         usernameEditText = findViewById(R.id.txtInptUsername)
         emailEditText = findViewById(R.id.txtInptEmail)
         passwordEditText = findViewById(R.id.txtInptPassword)
