@@ -4,6 +4,7 @@ import com.joudysabbagh.frontend.api.model.Email
 import com.joudysabbagh.frontend.api.model.Room
 import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
+import com.joudysabbagh.frontend.api.model.StudyGroup
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,6 +12,7 @@ import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.GET
 
 object RetrofitClient {
     // API URL from which we will send and receive packages
@@ -95,7 +97,13 @@ object RetrofitClient {
 
     }
     interface StudyService {
-    }
+        @GET("/getGroups")
+        fun getStudyGroups(): Call<List<StudyGroup>>
 
-    }
+        @POST("StudyGroup/addGroup")
+        fun createStudyGroup(@Body groupInfo: StudyGroup): Call<StudyGroup>
 
+        @POST("StudyGroup/addMember")
+        fun addMemberToGroup(@Body memberInfo: StudyGroup): Call<StudyGroup>
+    }
+}

@@ -1,20 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StudyGroupActivity">
 
+    <!-- Title at the top -->
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Study Groups"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:padding="16dp"
+        android:elevation="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_alignParentTop="true" />
+
+    <!-- Create Group button -->
+    <Button
+        android:id="@+id/createGroupButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
-        android:text="study group page"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Create Group"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_below="@id/titleTextView" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- List of Study Groups -->
+    <ListView
+        android:id="@+id/studyGroupListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/createGroupButton"
+        android:layout_marginTop="16dp" />
+
+    <!-- Study Group Details Pop-up -->
+    <RelativeLayout
+        android:id="@+id/groupDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/titleTextView"
+        android:visibility="gone"
+        android:background="@android:color/white"
+        android:padding="16dp">
+
+        <!-- Group Name -->
+        <TextView
+            android:id="@+id/groupNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Group Name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Group Description -->
+        <TextView
+            android:id="@+id/groupDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Group Description"
+            android:textSize="16sp"
+            android:layout_below="@id/groupNameTextView"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Members List -->
+        <TextView
+            android:id="@+id/membersListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Members List"
+            android:textSize="16sp"
+            android:layout_below="@id/groupDescriptionTextView"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Join Group Button -->
+        <Button
+            android:id="@+id/joinGroupButton"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/membersListTextView"
+            android:text="Join Group" />
+
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_below="@id/joinGroupButton" />
+    </RelativeLayout>
+
+</RelativeLayout>
