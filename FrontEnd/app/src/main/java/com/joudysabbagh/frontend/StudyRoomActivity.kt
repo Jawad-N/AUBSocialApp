@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.joudysabbagh.frontend.api.RetrofitClient
@@ -14,8 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class StudyRoomActivity : AppCompatActivity() {
-    private var rooms: ArrayList<Room>? = null
+    // var for room result search
     private var txtInptDay: TextInputLayout? = null
+    private var txtRoomResult: TextView? = null
     private var txtInpStart: TextInputLayout? = null
     private var txtInptEnd: TextInputLayout? = null
     private var txtInptBuilding: TextInputLayout? = null
@@ -27,6 +29,7 @@ class StudyRoomActivity : AppCompatActivity() {
 
         // Initialize TextInputLayout elements
         txtInptDay = findViewById(R.id.txtInptDay)
+        txtRoomResult = findViewById(R.id.txtRoomResult)
         txtInpStart = findViewById(R.id.txtInpStart)
         txtInptEnd = findViewById(R.id.txtInptEnd)
         txtInptBuilding = findViewById(R.id.txtInptBuilding)
@@ -46,27 +49,18 @@ class StudyRoomActivity : AppCompatActivity() {
         room.end_time= txtInptEnd?.editText?.text.toString()
 
         RetrofitClient.retrofitCourseAndRoomManagement().filterRoom(room)
-            .enqueue(object: Callback <ArrayList<Room>>{
-                override fun onResponse(call: Call<ArrayList<Room>>, response: Response<ArrayList<Room>>) {
+            .enqueue(object: Callback <ArrayList<String>>{
+                override fun onResponse(call: Call<ArrayList<String>>, response: Response<ArrayList<String>>) {
                     if (response.isSuccessful) {
-                        // Clear the previous list and add all from the response
-                        rooms?.clear()
-                        val responseBody = response.body()
-                        if (responseBody.isNullOrEmpty()) {
-                            // Show snack-bar when no rooms are available
-                            Snackbar.make(
-                                findButton as View,
-                                "No room available",
-                                Snackbar.LENGTH_LONG
-                            ).show()
+                        val rooms = response.body() // Assuming the response contains a list of room names
+                        if (!rooms.isNullOrEmpty()) {
+                            val roomList = rooms.joinToString("\n") // Join room names into a single string
+                            txtRoomResult?.text = roomList // Update TextView with room names
                         } else {
-                            // Add all the rooms from the response
-                            rooms?.addAll(responseBody)
-                            // Call onCompleted with the new list
-                            onCompleted(responseBody)
+                            txtRoomResult?.text = "No rooms found" // Display message if no rooms are found
                         }
                     } else {
-                        // Show snack-bar when there is an error with the response
+                        // Handle unsuccessful response
                         Snackbar.make(
                             findButton as View,
                             "Error 1: ${response.message()}",
@@ -75,8 +69,7 @@ class StudyRoomActivity : AppCompatActivity() {
                     }
                 }
 
-
-                override fun onFailure(call : Call <ArrayList<Room>>, t:Throwable){
+                override fun onFailure(call: Call<ArrayList<String>>, t: Throwable) {
                     Snackbar.make(
                         findButton as View,
                         "Error ${t.message}",
@@ -87,10 +80,4 @@ class StudyRoomActivity : AppCompatActivity() {
 
     }
 
-    private fun onCompleted(rooms: ArrayList<Room>) {
-        // Send the room list to the next activity where it will be displayed
-        val intent = Intent(this, FilteredRoom::class.java)
-        intent.putExtra("filtered_rooms", ArrayList(rooms))
-        startActivity(intent)
-    }
 }

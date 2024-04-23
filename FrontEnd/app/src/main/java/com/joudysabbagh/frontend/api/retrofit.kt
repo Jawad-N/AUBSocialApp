@@ -1,6 +1,7 @@
 package com.joudysabbagh.frontend.api
 
 import com.joudysabbagh.frontend.api.model.Email
+import com.joudysabbagh.frontend.api.model.Friend
 import com.joudysabbagh.frontend.api.model.Room
 import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
@@ -85,22 +86,22 @@ object RetrofitClient {
         fun resetPassword(@Body passwordInfo: Email) : Call <Email>
 
         @POST("user/add_friend")
-        fun addFriend(@Body friendInfo: User,
-                      @Header("Authorization") authorization: String?) : Call <Any>
+        fun addFriend(@Body friendInfo: Friend,
+                      @Header("Authorization") authorization: String?) : Call <Friend>
     }
     interface ChatService {
     }
     interface CourseAndRoomService {
         // Filter empty rooms
         @POST("room/find_empty_rooms")
-        fun filterRoom(@Body roomInfo: Room) : Call <ArrayList<Room>>
+        fun filterRoom(@Body roomInfo: Room) : Call <ArrayList<String>>
 
     }
     interface StudyService {
         @GET("/getGroups")
         fun getStudyGroups(): Call<List<StudyGroup>>
 
-        @POST("StudyGroup/addGroup")
+        @POST("study/addGroup")
         fun createStudyGroup(@Body groupInfo: StudyGroup): Call<StudyGroup>
 
         @POST("StudyGroup/addMember")
