@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ViewGroupActivity"
+            android:exported="false" />
+        <activity
             android:name=".FilteredRoom"
             android:exported="false" />
         <activity

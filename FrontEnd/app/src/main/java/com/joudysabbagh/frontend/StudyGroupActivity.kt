@@ -1,5 +1,6 @@
 package com.joudysabbagh.frontend
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -49,6 +50,7 @@ class StudyGroupActivity : AppCompatActivity() {
                             "Group created successfully.",
                             Snackbar.LENGTH_LONG
                         ).show()
+                        onComplete()
                     } else {
                         Snackbar.make(
                             createButton as View,
@@ -66,5 +68,9 @@ class StudyGroupActivity : AppCompatActivity() {
                     ).show()
                 }
             })
+    }
+    private fun onComplete() {
+        val intent = Intent(this, ViewGroupActivity::class.java)
+        startActivity(intent)
     }
 }

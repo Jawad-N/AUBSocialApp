@@ -81,7 +81,7 @@ class CatalogActivity : AppCompatActivity() {
     }
 
     private fun goToStudyGroupActivity() {
-        val intent = Intent(this, StudyGroupActivity::class.java)
+        val intent = Intent(this, ViewGroupActivity::class.java)
         startActivity(intent)
     }
 

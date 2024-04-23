@@ -2,6 +2,7 @@ package com.joudysabbagh.frontend.api
 
 import com.joudysabbagh.frontend.api.model.Email
 import com.joudysabbagh.frontend.api.model.Friend
+import com.joudysabbagh.frontend.api.model.Member
 import com.joudysabbagh.frontend.api.model.Room
 import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
@@ -98,13 +99,13 @@ object RetrofitClient {
 
     }
     interface StudyService {
-        @GET("/getGroups")
-        fun getStudyGroups(): Call<List<StudyGroup>>
+        @GET("study/getGroups")
+        fun getStudyGroups(): Call<ArrayList<StudyGroup>>
 
         @POST("study/addGroup")
         fun createStudyGroup(@Body groupInfo: StudyGroup): Call<StudyGroup>
 
-        @POST("StudyGroup/addMember")
-        fun addMemberToGroup(@Body memberInfo: StudyGroup): Call<StudyGroup>
+        @POST("study/addMember")
+        fun addMemberToGroup(@Body memberInfo: Member): Call<Member>
     }
 }
