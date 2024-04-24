@@ -50,6 +50,7 @@ def addTutoring():
 def getTutoring():
     tutoring_sessions = tutoringSession.query.all()
     print(tutoring_sessions)
+    serialized_tutoring_sessions = []
     serialized_tutoring_sessions = [ tutoring_schema.dump(tutoring_session) for tutoring_session in tutoring_sessions ]
     return jsonify( serialized_tutoring_sessions )
 

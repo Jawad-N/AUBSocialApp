@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".TutoringActivity">
 
-  <LinearLayout
-      android:layout_width="match_parent"
+  <TextView
+      android:id="@+id/header_title"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:orientation="vertical">
+      android:layout_marginTop="20dp"
+      android:textStyle="bold"
+      android:text="Tutoring Sessions"
+      android:textSize="24sp"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tutoring Sessions"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:padding="16dp"/>
 
-    <include layout="@layout/item_session"
-        android:id="@+id/session_box_1"/>
+  <Button
+      android:id="@+id/add_session_button"
+      style="@style/Widget.MaterialComponents.Button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginLeft="250dp"
+      android:layout_marginTop="8dp"
+      android:backgroundTint="#82afbd"
+      android:text="Add"
+      android:textColor="@android:color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.687"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/header_title" />
 
-    <include layout="@layout/item_session"
-        android:id="@+id/session_box_2"/>
+  <ListView
+      android:id="@+id/listview"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="104dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/add_session_button" />
 
-    <include layout="@layout/item_session"
-        android:id="@+id/session_box_3"/>
-
-    <!-- Add more session boxes as needed -->
-
-    <Button
-        android:id="@+id/add_session_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Tutoring Session"
-        android:layout_margin="16dp"/>
-
-  </LinearLayout>
-
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

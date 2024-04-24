@@ -9,7 +9,7 @@
         android:id="@+id/session_title_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course ID"/>
+        android:hint="Course Name"/>
 
     <EditText
         android:id="@+id/session_description_input"

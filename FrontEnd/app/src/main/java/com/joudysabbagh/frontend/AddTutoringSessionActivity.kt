@@ -1,6 +1,9 @@
 package com.joudysabbagh.frontend
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,6 +11,14 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
+import com.joudysabbagh.frontend.api.Authentication
+import com.joudysabbagh.frontend.api.RetrofitClient
+import com.joudysabbagh.frontend.api.model.Friend
+import com.joudysabbagh.frontend.api.model.TutoringSession
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AddTutoringSessionActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
@@ -22,38 +33,53 @@ class AddTutoringSessionActivity : AppCompatActivity() {
         titleEditText = findViewById(R.id.session_title_input)
         descriptionEditText = findViewById(R.id.session_description_input)
         priceEditText = findViewById(R.id.session_price_input)
+
         submitButton = findViewById(R.id.submit_button)
 
         submitButton.setOnClickListener {
-            val title = titleEditText.text.toString().trim()
-            val description = descriptionEditText.text.toString().trim()
-            val price = priceEditText.text.toString().trim()
-
-            if (title.isNotEmpty() && description.isNotEmpty() && price.isNotEmpty()) {
-                // Save the session details to your data source (e.g., database or API)
-                saveTutoringSession(title, description, price)
-
-                // Clear the input fields
-                titleEditText.text.clear()
-                descriptionEditText.text.clear()
-                priceEditText.text.clear()
-
-                // Show a success message
-                Toast.makeText(this, "Tutoring session added successfully", Toast.LENGTH_SHORT).show()
-            } else {
-                // Show an error message if any field is empty
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            }
+            addSession()
         }
     }
 
-    private fun saveTutoringSession(title: String, description: String, price: String) {
-        // Implement your logic to save the tutoring session details to your data source
-        // This could involve making an API call or interacting with a database
-        // For demonstration purposes, we'll just log the details
-        println("Saving tutoring session:")
-        println("Title: $title")
-        println("Description: $description")
-        println("Location: $price")
+    private fun addSession() {
+        val session = TutoringSession().apply {
+            course_name = titleEditText.text.toString().trim()
+            description = descriptionEditText.text.toString().trim()
+            price = priceEditText.text.toString().toFloatOrNull()
+        }
+
+        RetrofitClient.retrofitCourseAndRoomManagement().addSession(session)
+            .enqueue(object : Callback<TutoringSession> {
+                override fun onResponse(call: Call<TutoringSession>, response: Response<TutoringSession>) {
+                    if (response.isSuccessful) {
+                        Snackbar.make(
+                            submitButton,
+                            "Session added successfully.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                        onComplete()
+
+                    } else {
+                        Snackbar.make(
+                            submitButton,
+                            "Failed to add session. ${response.message()}",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<TutoringSession>, t: Throwable) {
+                    Snackbar.make(
+                        submitButton,
+                        "ERROR: ${t.message}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
+    private fun onComplete() {
+        val intent = Intent(this, TutoringActivity::class.java)
+        startActivity(intent)
     }
 }

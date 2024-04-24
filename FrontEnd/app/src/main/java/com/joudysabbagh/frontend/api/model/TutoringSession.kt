@@ -6,9 +6,12 @@ class TutoringSession {
     @SerializedName("courseID")
     var courseID: String? = null
 
+    @SerializedName("course_name")
+    var course_name: String? = null
+
     @SerializedName("description")
     var description: String? = null
 
     @SerializedName("price")
-    var price: String? = null
+    var price: Float? = null
 }

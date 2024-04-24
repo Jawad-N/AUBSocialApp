@@ -97,9 +97,11 @@ object RetrofitClient {
         // Filter empty rooms
         @POST("room/find_empty_rooms")
         fun filterRoom(@Body roomInfo: Room) : Call <ArrayList<String>>
+        @POST("course/addTutoring")
+        fun addSession(@Body roomInfo: TutoringSession) : Call <TutoringSession>
 
-        @GET("getTutoring")
-        fun filterSession(@Body sessioninfo: TutoringSession) : Call <ArrayList<String>>
+        @GET("course/getTutoring")
+        fun filterSession() : Call <ArrayList<TutoringSession>>
 
 
     }
