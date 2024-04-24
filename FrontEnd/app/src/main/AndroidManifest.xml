@@ -37,6 +37,9 @@
             android:name=".StudyGroupActivity"
             android:exported="false" />
         <activity
+            android:name=".JoinGroupActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
