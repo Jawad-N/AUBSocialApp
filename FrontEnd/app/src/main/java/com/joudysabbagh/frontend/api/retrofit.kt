@@ -100,7 +100,7 @@ object RetrofitClient {
     }
     interface StudyService {
         @GET("study/getGroups")
-        fun getStudyGroups(): Call<ArrayList<StudyGroup>>
+        fun getStudyGroups(): Call<List<StudyGroup>>
 
         @POST("study/addGroup")
         fun createStudyGroup(@Body groupInfo: StudyGroup): Call<StudyGroup>

@@ -31,35 +31,41 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#b5c9d8"
         android:text="Login Here"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/haveAccountTextView" />
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Register Now"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/getStartedTextView" />
 
     <TextView
         android:id="@+id/haveAccountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="60dp"
         android:text="Already have an account?"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registerButton" />
+
+    <Button
+        android:id="@+id/registerButton"
+        style="@style/Widget.MaterialComponents.Button"
+        android:backgroundTint="#b5c9d8"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:text="Register Now"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/getStartedTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
