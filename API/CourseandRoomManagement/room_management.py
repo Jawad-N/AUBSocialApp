@@ -42,8 +42,7 @@ def find_empty_rooms():
     # Determine the empty rooms
     empty_rooms = []
     empty_rooms = [room for room in all_rooms if (room not in occupied_rooms and room not in empty_rooms)]
-
-    return jsonify(empty_rooms=empty_rooms)
+    return jsonify(empty_rooms)
 
 def get_all_rooms_in_building(building):
     # Get all rooms in the building specified

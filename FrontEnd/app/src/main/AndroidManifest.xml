@@ -16,7 +16,37 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".entry"
+            android:name=".AddTutoringSessionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ViewGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FilteredRoom"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddFriendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudyRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudyGroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TutoringActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CatalogActivity"
             android:exported="false" />
         <activity
             android:name=".VerificationActivity"

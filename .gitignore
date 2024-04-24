@@ -6,3 +6,4 @@ __pycache__/
 **/.idea/usage.statistics.xml
 db_config.py
 /API/emailPass.py
+/API/FrontEnd/local.properties

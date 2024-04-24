@@ -9,7 +9,7 @@ from flask_marshmallow import Marshmallow
 from .db_config import DB_CONFIG 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:example_pass@172.17.0.2:3307/aubsocial'
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_CONFIG
 print( app.config['SQLALCHEMY_DATABASE_URI'] )
 CORS(app)
 db = SQLAlchemy(app)

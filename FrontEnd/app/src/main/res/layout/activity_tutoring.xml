@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tutoring Sessions"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="16dp"/>
+
+    <include layout="@layout/item_session"
+        android:id="@+id/session_box_1"/>
+
+    <include layout="@layout/item_session"
+        android:id="@+id/session_box_2"/>
+
+    <include layout="@layout/item_session"
+        android:id="@+id/session_box_3"/>
+
+    <!-- Add more session boxes as needed -->
+
+    <Button
+        android:id="@+id/add_session_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Tutoring Session"
+        android:layout_margin="16dp"/>
+
+  </LinearLayout>
+
+</ScrollView>

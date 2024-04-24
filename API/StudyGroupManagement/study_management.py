@@ -20,6 +20,7 @@ def getGroups():
 #Steps are, take the group name and username
 #Check these are valid, i.e. user and group found
 #Check user isn't already part of the group
+
 #Add the user to the group
 @study_management.route('/addMember', methods = ["POST"])
 def postMembership():
@@ -62,25 +63,27 @@ def postMembership():
 #check groupname and creator are valid
 #create the group
 #add the creator as a member
-@study_management.route('/addGroup', methods = ["POST"])
+@study_management.route('/addGroup', methods=["POST"])
 def postGroup():
-    data = request.json
+    # Ensuring all fields are present in the JSON body
     try:
-        groupName = data["group_name"]
-        creator = data["creator"]
-        desc = data["description"]
-    except:
-        abort( 400, "Missing fields" )
+        groupName = request.json["group_name"]
+        creator = request.json["creator"]
+        desc = request.json["description"]
+    except KeyError as e:
+        # If a KeyError occurred, it means the field is not present in the JSON body
+        abort(400, "Missing field: " + str(e))
 
-    studygroup = StudyGroup.query.filter_by( group_name = groupName ).first()
-    print( studygroup )
+    # Checking if the study group already exists
+    studygroup = StudyGroup.query.filter_by(group_name=groupName).first()
     if studygroup:
-        return jsonify( {"error": "Group exists already"}, 409 )
-    
-    user = User.query.filter_by( username = creator ).first()
-    if not user:
-        return jsonify( {"error": "Creator not found in the user database"}, 404 )
+        return jsonify({"error": "Group exists already"}), 409
 
+    # Checking if the creator exists as a user
+    user = User.query.filter_by(username=creator).first()
+    if not user:
+        return jsonify({"error": "Creator not found in the user database"}), 404
+    
     print( user.id )
     new_group = StudyGroup( group_name = groupName, creator_id = user.id, description = desc )
     db.session.add( new_group )
