@@ -7,6 +7,7 @@ import com.joudysabbagh.frontend.api.model.Room
 import com.joudysabbagh.frontend.api.model.Token
 import com.joudysabbagh.frontend.api.model.User
 import com.joudysabbagh.frontend.api.model.StudyGroup
+import com.joudysabbagh.frontend.api.model.TutoringSession
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -97,7 +98,12 @@ object RetrofitClient {
         @POST("room/find_empty_rooms")
         fun filterRoom(@Body roomInfo: Room) : Call <ArrayList<String>>
 
+        @GET("getTutoring")
+        fun filterSession(@Body sessioninfo: TutoringSession) : Call <ArrayList<String>>
+
+
     }
+
     interface StudyService {
         @GET("study/getGroups")
         fun getStudyGroups(): Call<Any>
