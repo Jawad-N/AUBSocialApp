@@ -54,7 +54,7 @@ class StudyRoomActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val rooms = response.body() // Assuming the response contains a list of room names
                         if (!rooms.isNullOrEmpty()) {
-                            val roomList = rooms.joinToString("\n") // Join room names into a single string
+                            val roomList = rooms.joinToString(" \n") // Join room names into a single string
                             txtRoomResult?.text = roomList // Update TextView with room names
                         } else {
                             txtRoomResult?.text = "No rooms found" // Display message if no rooms are found

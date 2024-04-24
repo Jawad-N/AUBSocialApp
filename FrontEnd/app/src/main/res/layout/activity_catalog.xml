@@ -6,83 +6,155 @@
     android:layout_height="match_parent"
     tools:context=".CatalogActivity">
 
+    <!-- Tutoring -->
+
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:text="Social App Catalogue"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btnTutoring"
         style="@style/Widget.MaterialComponents.Button"
-        android:backgroundTint="#b5c9d8"
-        android:layout_width="200dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#bc9286"
+        android:text="TUTORING"
         android:textColor="@android:color/black"
-        android:layout_marginTop="128dp"
-        android:text="Tutoring"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddFriend" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnFeedback"
         style="@style/Widget.MaterialComponents.Button"
-        android:backgroundTint="#b5c9d8"
-        android:layout_width="200dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#bc9286"
+        android:text="FEEDBACK"
         android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        android:text="Feedback"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTutoring" />
+
+    <TextView
+        android:id="@+id/txtTutoring"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="* Custom Help: A click away from personalized academic support!"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnTutoring" />
 
     <Button
+        android:id="@+id/btnStudyRoom"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="#bc9286"
+        android:text="STUDY ROOM"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtFeedback" />
+
+    <TextView
+        android:id="@+id/txtMenu"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="* Campus Cuisine: Browse today's food menu and satisfy your cravings."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnMenu" />
+
+    <Button
         android:id="@+id/btnMenu"
         style="@style/Widget.MaterialComponents.Button"
-        android:backgroundTint="#b5c9d8"
-        android:layout_width="200dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:layout_marginTop="12dp"
-        android:text="Menu"
+        android:backgroundTint="#bc9286"
+        android:text="MENU"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtStudyGroup" />
+
+    <TextView
+        android:id="@+id/txtFeedback"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="* Your Reviews Matter: Influence course and teaching quality with your input."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnFeedback" />
+
+    <TextView
+        android:id="@+id/txtStudyRoom"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="* Campus Study Spots: Find the perfect place to concentrate on campus."
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnStudyRoom" />
+
+    <TextView
+        android:id="@+id/txtStudyGroup"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="* Collaborative Learning: Join a study group and achieve goals together."
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnStudyGroup" />
 
     <Button
         android:id="@+id/btnStudyGroup"
         style="@style/Widget.MaterialComponents.Button"
-        android:backgroundTint="#b5c9d8"
-        android:layout_width="200dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="8dp"
-        android:text="Study Group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnStudyRoom" />
-
-    <Button
-        android:id="@+id/btnStudyRoom"
-        style="@style/Widget.MaterialComponents.Button"
-        android:backgroundTint="#b5c9d8"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
         android:layout_marginTop="12dp"
-        android:text="Study Room"
+        android:backgroundTint="#bc9286"
+        android:text="STUDY GROUP"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnFeedback" />
+        app:layout_constraintTop_toBottomOf="@id/txtStudyRoom" />
+
 
     <Button
         android:id="@+id/btnAddFriend"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#b5b5b5"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#dec7c1"
         android:text="Add Friend"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,12 +167,12 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#b5b5b5"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#dec7c1"
         android:text="Log out"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

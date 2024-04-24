@@ -3,30 +3,85 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="50dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Tutoring Session"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:layout_marginTop="100dp"/>
 
-    <EditText
-        android:id="@+id/session_title_input"
+    <!-- Course Name -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Name"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="70dp">
 
-    <EditText
-        android:id="@+id/session_description_input"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Name: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/session_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter course name" />
+    </LinearLayout>
+
+    <!-- Description -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
 
-    <EditText
-        android:id="@+id/session_price_input"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/session_description_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter description" />
+    </LinearLayout>
+
+    <!-- Price -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Price"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/session_price_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter price" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/submit_button"
-        android:layout_width="match_parent"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="215dp"
+        android:backgroundTint="#bc9286"
+        android:text="Submit"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

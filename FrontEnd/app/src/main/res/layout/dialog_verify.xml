@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efe3df"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -44,6 +45,7 @@
             android:layout_height="match_parent"
             android:inputType="text"
             android:singleLine="true"
+            android:background="#ffffff"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
