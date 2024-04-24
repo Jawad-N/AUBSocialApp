@@ -30,14 +30,15 @@ def getCourseById(course_id):
 @course_management.route('/addTutoring', methods = ["POST"] )
 def addTutoring():
     data = request.json
-
     try:
-        courseID = data["courseID"]
+        course_name = data["course_name"]
         description = data["description"]
         price = data["price"]
     except:
         abort(400, "Missing required fields")
 
+
+    courseID = Course.query.filter_by( name = course_name ).first().id
     tutoring_session = tutoringSession( courseID = courseID, description = description, price = price )
     db.session.add(tutoring_session)
     db.session.commit()
@@ -48,7 +49,6 @@ def addTutoring():
 @course_management.route('/getTutoring', methods=["GET"])
 def getTutoring():
     tutoring_sessions = tutoringSession.query.all()
-    print(tutoring_sessions)
     
     serialized_tutoring_sessions = [ tutoring_schema.dump(tutoring_session) for tutoring_session in tutoring_sessions ]
     result = { "data": serialized_tutoring_sessions }
