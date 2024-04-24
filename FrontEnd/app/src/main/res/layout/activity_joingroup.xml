@@ -65,7 +65,7 @@
 
     <!-- Create Button -->
     <Button
-        android:id="@+id/createButton"
+        android:id="@+id/joinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Join"

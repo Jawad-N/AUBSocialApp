@@ -36,8 +36,8 @@ class JoinGroupActivity : AppCompatActivity() {
     private fun joinGroup() {
         val member = Member()
 
-        member.member = groupNameInputLayout?.editText?.text.toString()
-        member.group = txtInptUsername?.editText?.text.toString().trim()
+        member.member = txtInptUsername?.editText?.text.toString()
+        member.group = groupNameInputLayout?.editText?.text.toString().trim()
 
         RetrofitClient.retrofitStudyGroupManagement().addMemberToGroup(member)
             .enqueue(object : Callback<Member> {
