@@ -45,13 +45,17 @@ class AddCourseFeedbackActivity : AppCompatActivity() {
     private fun addFeedback() {
         val feedback = CourseFeedback().apply {
             course_name = courseNameEditText.text.toString().trim()
-            course_section = courseSectionEditText.text.toString().trim()
+            section = courseSectionEditText.text.toString().trim()
             content = professorEditText.text.toString().trim()
         }
 
-        RetrofitClient.retrofitCourseAndRoomManagement().addFeedback(feedback)
+        RetrofitClient.retrofitCourseAndRoomManagement()
+            .addFeedback(feedback, "Bearer ${Authentication.getToken()}")
             .enqueue(object : Callback<CourseFeedback> {
-                override fun onResponse(call: Call<CourseFeedback>, response: Response<CourseFeedback>) {
+                override fun onResponse(
+                    call: Call<CourseFeedback>,
+                    response: Response<CourseFeedback>
+                ) {
                     if (response.isSuccessful) {
                         Snackbar.make(
                             submitButton,
@@ -83,4 +87,6 @@ class AddCourseFeedbackActivity : AppCompatActivity() {
         val intent = Intent(this, FeedbackActivity::class.java)
         startActivity(intent)
     }
+
 }
+

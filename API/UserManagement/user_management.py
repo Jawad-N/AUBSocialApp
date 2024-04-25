@@ -227,7 +227,7 @@ def reset_password():
     
 @user_management.route('/get_user', methods=['POST'])
 def get_user():
-    token = extract_auth_token(request)
+    token = extract_auth_token( request )
     user_id = decode_token( token )
     if user_id==None:
         return None, 200

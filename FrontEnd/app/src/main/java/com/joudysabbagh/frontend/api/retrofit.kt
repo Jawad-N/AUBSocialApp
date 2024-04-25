@@ -22,7 +22,6 @@ object RetrofitClient {
     // API URL from which we will send and receive packages
     private const val API_URL_UM: String = "http://10.0.2.2:5001"
     private const val API_URL_CRM: String = "http://10.0.2.2:5002"
-    private const val API_URL_CM: String = "http://10.0.2.2:5003"
     private const val API_URL_SGM: String = "http://10.0.2.2:5004"
 
     // Set up details on how to send and receive these data packages
@@ -45,16 +44,6 @@ object RetrofitClient {
             .build()
         // Create an implementation of the ChatService interface that handles making HTTP requests to the specified base URL
         return retrofit.create(CourseAndRoomService::class.java)
-    }
-
-    // CHAT ROOM MANAGEMENT API FUNCTION CALL
-    fun retrofitChatManagement(): ChatService {
-        val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(API_URL_CM)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        // Create an implementation of the CourseAndRoomService interface that handles making HTTP requests to the specified base URL
-        return retrofit.create(ChatService::class.java)
     }
 
     // STUDY GROUP MANAGEMENT API FUNCTION CALL
@@ -92,8 +81,7 @@ object RetrofitClient {
         fun addFriend(@Body friendInfo: Friend,
                       @Header("Authorization") authorization: String?) : Call <Friend>
     }
-    interface ChatService {
-    }
+
     interface CourseAndRoomService {
         // Filter empty rooms
         @POST("room/find_empty_rooms")
@@ -108,7 +96,8 @@ object RetrofitClient {
         fun filterFeedback() : Call <ArrayList<CourseFeedback>>
 
         @POST("course/addCourseFeedback")
-        fun addFeedback(@Body courseFeedback: CourseFeedback) : Call <CourseFeedback>
+        fun addFeedback(@Body courseFeedback: CourseFeedback,
+            @Header("Authorization") authorization: String?) : Call <CourseFeedback>
     }
 
     interface StudyService {

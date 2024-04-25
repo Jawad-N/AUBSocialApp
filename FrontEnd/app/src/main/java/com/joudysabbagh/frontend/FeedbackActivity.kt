@@ -90,7 +90,7 @@ class FeedbackActivity : AppCompatActivity() {
             val feedback = getItem(position)
 
             course_name?.text = "Course Name: ${feedback.course_name}"
-            course_section?.text = "Course Section: ${feedback.course_section}"
+            course_section?.text = "Course Section: ${feedback.section}"
             professor?.text = "Professor: ${feedback.professor}"
 
             return view!!

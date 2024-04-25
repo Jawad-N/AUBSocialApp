@@ -6,8 +6,8 @@ class CourseFeedback {
     @SerializedName("course_name")
     var course_name: String? = null
 
-    @SerializedName("course_section")
-    var course_section: String? = null
+    @SerializedName("section")
+    var section: String? = null
 
     @SerializedName("professor")
     var professor: String? = null

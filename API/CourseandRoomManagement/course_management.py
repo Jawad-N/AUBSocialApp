@@ -59,6 +59,7 @@ def getTutoring():
 @course_management.route('/addCourseFeedback', methods = ["POST"])
 def addCourseFeedback():
     # Parse JSON payload from the request
+    print(request.json)
     data = request.json
     headers = dict(request.headers)
     body = request.get_json()
@@ -90,14 +91,8 @@ def addCourseFeedback():
 
 @course_management.route('/getFeedback', methods=["GET"])
 def get_feedback():
-    course_name = request.json.get('course_name', None)  # Get course name from query parameters, if provided
-
-    # Start with a base query for all feedback
+    
     feedback_query =courseFeedback.query.join(Course, Course.id == courseFeedback.course_id)
-
-    if course_name:
-        # If a course name is provided, filter the feedback for that course
-        feedback_query = feedback_query.filter(Course.name == course_name)
 
     # Order the results by course ID
     feedback_query = feedback_query.order_by(courseFeedback.course_id)
@@ -106,10 +101,16 @@ def get_feedback():
     feedback_records = feedback_query.all()
 
     # Serialize the feedback records
+    serialized_feedback=[]
     serialized_feedback = [course_feedback_schema.dump(feedback) for feedback in feedback_records]
+
     for feedback in serialized_feedback:
+
         # Add the course name to each feedback record
         feedback['course_name'] = Course.query.get(feedback['course_id']).name
-        feedback['course_section'] = Course.query.get(feedback['course_id']).section
+
+        feedback['section'] = Course.query.get(feedback['course_id']).section
+
         feedback['professor'] = Course.query.get(feedback['course_id']).professor
+
     return jsonify(serialized_feedback)
