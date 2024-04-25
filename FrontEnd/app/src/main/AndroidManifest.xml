@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AddCourseFeedbackActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddTutoringSessionActivity"
             android:exported="true" />
         <activity

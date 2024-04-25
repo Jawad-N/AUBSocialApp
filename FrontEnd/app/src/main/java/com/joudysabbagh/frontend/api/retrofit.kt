@@ -1,5 +1,6 @@
 package com.joudysabbagh.frontend.api
 
+import com.joudysabbagh.frontend.api.model.CourseFeedback
 import com.joudysabbagh.frontend.api.model.Email
 import com.joudysabbagh.frontend.api.model.Friend
 import com.joudysabbagh.frontend.api.model.Member
@@ -103,7 +104,11 @@ object RetrofitClient {
         @GET("course/getTutoring")
         fun filterSession() : Call <ArrayList<TutoringSession>>
 
+        @GET("course/getFeedback")
+        fun filterFeedback() : Call <ArrayList<CourseFeedback>>
 
+        @POST("course/addCourseFeedback")
+        fun addFeedback(@Body courseFeedback: CourseFeedback) : Call <CourseFeedback>
     }
 
     interface StudyService {

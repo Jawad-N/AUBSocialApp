@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="50dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Course Feedback"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:layout_marginTop="100dp"/>
+
+    <!-- Course Name -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Name: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/course_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter course name" />
+    </LinearLayout>
+
+    <!-- Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Course Section: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/course_section_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter section" />
+    </LinearLayout>
+
+    <!-- Professor -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professor: "
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/course_professor_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Professor's name" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit_button"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="215dp"
+        android:backgroundTint="#bc9286"
+        android:text="Submit"
+        android:textColor="@android:color/black" />
+
+</LinearLayout>
